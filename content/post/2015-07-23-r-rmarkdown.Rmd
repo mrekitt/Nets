@@ -1,5 +1,5 @@
 ---
-title: "Bar Plots"
+title: "Barplots"
 author: "Micheal Rekitt"
 date: 2017-12-08
 categories: ["R"]
@@ -10,35 +10,44 @@ tags: ["R Markdown", "plot", "regression"]
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-# R Markdown
+# Quick tutorial on how to make barplots via Rstudio.
 
-Quick tutorial on how to make barplots via Rstudio.
-
-Step one for this tutorial is to activate three packages: Lahman, sqldf, and ggplot2.
+## Step One 
+### Activate three packages: Lahman, sqldf, and ggplot2.
 
 ```{r}
 library(Lahman)
 library(sqldf)
 library(ggplot2)
 ```
+## Step Two
+### Determine data
 
+Let's look at team homeruns totals from 1990
+```{r}
+query<-"SELECT name,HR
+FROM Teams
+WHERE yearID=1990
+ORDER BY HR"
 
-```{r cars}
-summary(cars)
-fit <- lm(dist ~ speed, data = cars)
-fit
+result<-sqldf(query)
+result$name<-factor(result$name,levels=result$name)
+```
+## Step Three
+### Creating the barplot
+```{r}
+ggplot()+
+  geom_bar(data=result,aes(x=name,y=HR),stat='identity')+
+  coord_flip()+
+  ggtitle("1990 Team Homerun Totals")+
+  xlab("Team Name")+
+  ylab("homeruns")
 ```
 
-# Including Plots
 
-You can also embed plots. See Figure \@ref(fig:pie) for example:
+## Notes
 
-```{r pie, fig.cap='A fancy pie chart.', tidy=FALSE}
-par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
-  col = c('#0292D8', '#F7EA39', '#C4B632'),
-  init.angle = -50, border = NA
-)
-```
+If you want to switch the x and y axis remove "coord_flip()+"
+
+"geom_bar" identifies for the visualization to be a barplot
+
