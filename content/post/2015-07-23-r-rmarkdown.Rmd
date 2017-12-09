@@ -1,7 +1,7 @@
 ---
-title: "Hello R Markdown"
-author: "Frida Gomam"
-date: 2015-07-23T21:13:14-05:00
+title: "Bar Plots"
+author: "Micheal Rekitt"
+date: 2017-12-08
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 ---
@@ -12,9 +12,16 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 # R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Quick tutorial on how to make barplots via Rstudio.
 
-You can embed an R code chunk like this:
+Step one for this tutorial is to activate three packages: Lahman, sqldf, and ggplot2.
+
+```{r}
+library(Lahman)
+library(sqldf)
+library(ggplot2)
+```
+
 
 ```{r cars}
 summary(cars)
